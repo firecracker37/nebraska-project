@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Yesteryear&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.brand-text {
+    font-family: "Yesteryear", cursive;
+    font-size: 2.3em;
+    color: #d00000;
+    text-shadow:
+    -1px -1px 0 #f5f1e7,
+    1px -1px 0 #f5f1e7,
+    -1px 1px 0 #f5f1e7,
+    1px 1px 0 #f5f1e7;
+}
