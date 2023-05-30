@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useSendContactMutation } from '../slices/contactApiSlice';
 import { toast } from 'react-toastify';
 
 export default function ContactForm() {
@@ -7,28 +9,17 @@ export default function ContactForm() {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
 
+  const [contact, {isLoading}] = useSendContactMutation();
+
   // Define a function to handle the form submission
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      // Send the user input to an API endpoint or a backend service
-      // You can use fetch, axios, or any other library to make the request
-      // For example:
-      // const res = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      //   body: JSON.stringify({ name, email, message }),
-      // });
-      // const data = await res.json();
-      // Check the response status and show a success or error message
-      // For example:
-      // if (data.success) {
-      //   toast.success('Your message has been sent!');
-      // } else {
-      //   toast.error(data.message || 'Something went wrong!');
-      // }
+      await contact({ name, email, message }).unwrap();
+      toast.success('Contact message sent successfully!');
+      setName('');
+      setEmail('');
+      setMessage('');
     } catch (err) {
       toast.error(err.message || 'Something went wrong!');
     }
@@ -78,6 +69,7 @@ export default function ContactForm() {
         <button
           type="submit"
           className="bg-gray-800 text-white rounded px-4 py-2 hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+          disabled={isLoading}
         >
           Send
         </button>

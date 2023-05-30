@@ -26,4 +26,13 @@ const contactForm = asyncHandler(async (req, res) => {
     }
 });
 
-export { contactForm };
+// @desc    Get all contact information
+// @route   GET /api/contact
+// @access  Private
+const getAllContacts = asyncHandler(async (req, res) => {
+    const contacts = await Contact.find({}); // Fetch all contacts from the database
+  
+    res.json(contacts);
+  });
+
+export { contactForm,  getAllContacts };
