@@ -13,7 +13,7 @@ import store from './store';
 import { Provider } from 'react-redux';
 import './index.css';
 import HomeScreen from './screens/HomeScreen';
-import LocationsScreen  from './screens/LocationsScreen';
+import LocationsScreen from './screens/LocationsScreen';
 import EventsScreen from './screens/EventsScreen';
 import PeopleScreen from './screens/PeopleScreen';
 import ContactScreen from './screens/ContactScreen';
@@ -21,6 +21,8 @@ import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import ViewContactsScreen from './screens/ViewContactsScreen.jsx';
+import UserDashboard from './screens/UserDashboard.jsx';
+import AdminDashboard from './screens/AdminDashboard.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -34,9 +36,11 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/dashboard" element={<UserDashboard />} />
       </Route>
       <Route path="" element={<AdminProtect />}>
         <Route path="/viewcontacts" element={<ViewContactsScreen />} />
+        <Route path="/admindashboard" element={<AdminDashboard />} />
       </Route>
     </Route>
   )
