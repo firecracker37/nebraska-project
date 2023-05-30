@@ -6,6 +6,7 @@ import cookieParser from 'cookie-parser';
 
 import userRoutes from './routes/userRoutes.js'
 import contactRoutes from './routes/contactRoutes.js'
+import peopleRoutes from './routes/peopleRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 const port = process.env.PORT || 5000;
@@ -22,6 +23,7 @@ app.get('/', (req, res) => res.send('API running'));
 
 app.use('/api/users', userRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/people', peopleRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
