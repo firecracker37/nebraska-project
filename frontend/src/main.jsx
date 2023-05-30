@@ -8,6 +8,7 @@ import {
   RouterProvider,
 } from 'react-router-dom';
 import PrivateRoute from './components/PrivateRoute.jsx';
+import AdminProtect from './components/AdminProtect.jsx';
 import store from './store';
 import { Provider } from 'react-redux';
 import './index.css';
@@ -19,6 +20,7 @@ import ContactScreen from './screens/ContactScreen';
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
 import ProfileScreen from './screens/ProfileScreen';
+import ViewContactsScreen from './screens/ViewContactsScreen.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -32,6 +34,9 @@ const router = createBrowserRouter(
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
+      </Route>
+      <Route path="" element={<AdminProtect />}>
+        <Route path="/viewcontacts" element={<ViewContactsScreen />} />
       </Route>
     </Route>
   )
