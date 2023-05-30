@@ -1,8 +1,29 @@
 import { useState } from 'react';
 import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useLogoutMutation } from '../slices/usersApiSlice';
+import { logout } from '../slices/authSlice';
 
 export default function Header() {
+  const { userInfo } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [logoutApiCall] = useLogoutMutation();
+
+  const logoutHandler = async () => {
+    try {
+      await logoutApiCall().unwrap();
+      dispatch(logout());
+      toggleMenu();
+      navigate('/login');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -55,12 +76,21 @@ export default function Header() {
         >
           Contact
         </Link>
-        <Link
+        {userInfo ? (
+          <Link
+          onClick={logoutHandler}
+          className="mr-4 text-white hover:text-gray-300"
+        >
+          Logout
+        </Link>
+        ) : (
+          <Link
           to="/Login"
           className="mr-4 text-white hover:text-gray-300"
         >
           Login
         </Link>
+        )}
       </nav>
       <div
         className={`${
@@ -102,13 +132,23 @@ export default function Header() {
         >
           Contact
         </Link>
-        <Link
+        {userInfo ? (
+          <Link
+          className="block py-2 px-4 text-white hover:bg-red-700"
+          onClick={logoutHandler}
+        >
+          Logout
+        </Link>
+        ) : (
+          <Link
           to="/login"
           className="block py-2 px-4 text-white hover:bg-red-700"
           onClick={toggleMenu}
         >
           Login
         </Link>
+        )};
+        
       </div>
     </header>
   );
