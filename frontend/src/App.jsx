@@ -10,7 +10,7 @@ export default function App() {
       <div className="flex flex-col min-h-screen">
         <Header />
         <ToastContainer />
-        <main className="flex-grow">
+        <main className="flex-grow p-4 lg:w-[1024px] lg:mx-auto">
           <Outlet />
         </main>
         <Footer />
