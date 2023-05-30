@@ -1,7 +1,11 @@
 import React from 'react'
+import FormContainer from '../components/FormContainer'
+import ContactForm from '../components/ContactForm'
 
 export default function ContactScreen() {
   return (
-    <div>ContactScreen</div>
+    <FormContainer>
+      <ContactForm />
+    </FormContainer>
   )
 }

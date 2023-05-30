@@ -5,6 +5,7 @@ import connectDB from './config/db.js';
 import cookieParser from 'cookie-parser';
 
 import userRoutes from './routes/userRoutes.js'
+import contactRoutes from './routes/contactRoutes.js'
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 const port = process.env.PORT || 5000;
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.get('/', (req, res) => res.send('API running'));
 
 app.use('/api/users', userRoutes);
+app.use('/api/contact', contactRoutes);
 
 app.use(notFound);
 app.use(errorHandler);
